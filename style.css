@@ -27,8 +27,7 @@ body {
 
 .step {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    /* Leave room at bottom for the sticky ad */
-    padding: 30px 24px calc(var(--ad-height) + 30px) 24px; box-sizing: border-box;
+    padding: 30px 24px 0 24px; box-sizing: border-box;
     display: flex; flex-direction: column;
     transform: translateX(100%); opacity: 0;
     transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
@@ -94,11 +93,27 @@ body {
 /* Canvas (Now full step) */
 .signature-section { display: flex; flex-direction: column; flex: 1; margin-bottom: 24px;}
 .sig-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 16px; font-weight: 800; color: var(--text-main); }
-.canvas-container { flex: 1; border: none; border-radius: 20px; background-color: var(--bg-color); overflow: hidden; min-height: 300px;}
-canvas { width: 100%; height: 100%; touch-action: none; }
+.canvas-container { 
+    flex: 1; border: 2px dashed #e5e8eb; border-radius: 20px; 
+    background-color: var(--bg-color); overflow: hidden; min-height: 300px;
+    position: relative;
+}
+.canvas-container::before {
+    content: '여기에 서명해 주세요';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px; font-weight: 700; color: #b0b8c1;
+    pointer-events: none; z-index: 1;
+}
+canvas { width: 100%; height: 100%; touch-action: none; position: relative; z-index: 2; }
 
 /* Buttons */
-.button-group { margin-top: auto; display: flex; gap: 12px; padding-top: 24px; padding-bottom: 10px; }
+.button-group { 
+    margin-top: auto; display: flex; gap: 12px; 
+    padding: 24px 0 calc(var(--ad-height) + 24px) 0; 
+    position: sticky; bottom: 0; background: var(--card-bg); z-index: 10;
+}
 button { font-family: inherit; cursor: pointer; border: none; }
 .btn-primary { flex: 1; background-color: var(--primary); color: #fff; font-size: 18px; font-weight: 700; padding: 20px; border-radius: 18px; transition: background-color 0.2s; }
 .btn-primary:active { background-color: var(--primary-hover); transform: scale(0.98); }
