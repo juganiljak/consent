@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>초상권 동의서</title>
+    <title>초상권 동의서 - 간편하게 폰으로 작성하는 촬영 계약서</title>
+    <meta name="description" content="앱 설치 없이 모바일에서 바로 작성하고 갤러리에 저장하는 무료 초상권 동의서 앱. 스튜디오, 작가, 모델을 위한 안전하고 깔끔한 계약 솔루션.">
+    <meta name="keywords" content="초상권 동의서, 모델 계약서, 촬영 계약서, TFP, 무페이 촬영, 스튜디오 촬영, 전자서명">
+    <meta property="og:title" content="간편 초상권 동의서">
+    <meta property="og:description" content="앱 설치 없이 폰에서 바로 작성하고 저장하는 가장 깔끔한 촬영 계약서">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
     <!-- Pretendard Font -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
@@ -20,6 +25,12 @@
                 <p style="text-align: center; margin-bottom: 40px;">앱 설치 없이 폰에서 바로 계약하고<br>서로의 권리를 완벽하게 보호하세요.</p>
                 <button class="btn-primary" style="flex: none; width: auto; padding: 18px 48px; border-radius: 30px; font-size: 18px; box-shadow: 0 8px 20px rgba(49, 130, 246, 0.3);" onclick="nextStep(1)">시작하기</button>
                 <p class="intro-notice" style="margin-top: 24px;">🔒 서명 완료 시 이미지만 기기에 저장되며<br>외부 서버에 정보가 남지 않아 안전합니다.</p>
+                
+                <div style="margin-top: 60px; font-size: 12px; color: #adb5bd; text-align: center; padding-bottom: 20px;">
+                    <p style="margin-bottom: 10px;">이 서비스는 사진 작가와 모델의 안전한 작업을 돕습니다.<br>입력하신 개인정보는 어딘가로 전송되지 않습니다.</p>
+                    <a href="terms.html" style="color: #adb5bd; text-decoration: underline; margin-right: 15px;">이용약관</a>
+                    <a href="privacy.html" style="color: #adb5bd; text-decoration: underline;">개인정보처리방침</a>
+                </div>
             </div>
         </div>
 
@@ -276,8 +287,10 @@
             </div>
 
             <!-- Download Button -->
-            <button class="btn-primary download-btn" onclick="downloadImage()">📸 갤러리에 저장하기</button>
-            <button class="btn-text" style="margin-top:15px; width:100%" onclick="location.reload()">새로 작성하기</button>
+            <div class="button-group" style="flex-direction: column; gap: 8px;">
+                <button class="btn-primary download-btn" onclick="downloadImage()">저장하기</button>
+                <button class="btn-secondary" style="width:100%" onclick="location.reload()">새로 작성하기</button>
+            </div>
         </div>
 
         <!-- Global Sticky Ad Placeholder (Visible across all steps) -->

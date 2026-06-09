@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://juganiljak.github.io/consent/sitemap.xml
