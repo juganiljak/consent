@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>초상권 동의서</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Intro Step -->
+        <div class="step active" id="step-intro">
+            <div class="intro-content">
+                <div class="icon-wrapper">📸</div>
+                <h1>안전하고 깔끔한<br>초상권 동의 계약</h1>
+                <p>앱 설치 없이 폰에서 바로 계약하고<br>서로의 권리를 완벽하게 보호하세요.</p>
+            </div>
+            <button class="btn-primary" onclick="nextStep(1)">무료로 시작하기</button>
+            <p class="intro-notice">🔒 서명 완료 시 이미지만 기기에 저장되며<br>외부 서버에 정보가 남지 않아 안전합니다.</p>
+        </div>
+
+        <!-- Step 1: Contract Info -->
+        <div class="step" id="step-1">
+            <div class="step-header">
+                <span class="step-indicator">1 / 5</span>
+                <h2>계약 기본 정보를<br>입력해 주세요</h2>
+            </div>
+            <div class="input-group">
+                <label>촬영 일자</label>
+                <input type="date" id="shootDate" required>
+            </div>
+            <div class="input-group">
+                <label>계약 유형</label>
+                <select id="shootCondition" onchange="toggleFeeInput()">
+                    <option value="상호 무페이">상호 무페이</option>
+                    <option value="모델료 지급">모델료 지급</option>
+                    <option value="작가 촬영비 지급">작가 촬영비 지급</option>
+                </select>
+            </div>
+            <div class="input-group hidden" id="feeAmountGroup">
+                <label>지급 금액</label>
+                <input type="text" id="feeAmount" placeholder="예: 150,000원">
+            </div>
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevStep(0)">이전</button>
+                <button class="btn-primary" onclick="nextStep(2)">다음</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Person Info -->
+        <div class="step" id="step-2">
+            <div class="step-header">
+                <span class="step-indicator">2 / 5</span>
+                <h2>작가와 모델의<br>연락처를 입력해 주세요</h2>
+            </div>
+            
+            <div class="card card-person">
+                <h3>📸 촬영자 (작가)</h3>
+                <div class="input-group">
+                    <label>성명</label>
+                    <input type="text" id="photographerName" placeholder="예: 홍길동" required>
+                </div>
+                <div class="input-group">
+                    <label>연락처</label>
+                    <div class="phone-inputs">
+                        <span class="phone-prefix">010</span>
+                        <span class="dash">-</span>
+                        <input type="tel" id="pPhone1" maxlength="4" placeholder="0000" required>
+                        <span class="dash">-</span>
+                        <input type="tel" id="pPhone2" maxlength="4" placeholder="0000" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-person">
+                <h3>✨ 모델 (피사체)</h3>
+                <div class="input-group">
+                    <label>성명</label>
+                    <input type="text" id="modelName" placeholder="예: 김영희" required>
+                </div>
+                <div class="input-group">
+                    <label>연락처</label>
+                    <div class="phone-inputs">
+                        <span class="phone-prefix">010</span>
+                        <span class="dash">-</span>
+                        <input type="tel" id="mPhone1" maxlength="4" placeholder="0000" required>
+                        <span class="dash">-</span>
+                        <input type="tel" id="mPhone2" maxlength="4" placeholder="0000" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevStep(1)">이전</button>
+                <button class="btn-primary" onclick="nextStep(3)">다음</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Terms & Commercial Use -->
+        <div class="step" id="step-3">
+            <div class="step-header">
+                <span class="step-indicator">3 / 5</span>
+                <h2>이미지 이용 범위와<br>권리를 확인해 주세요</h2>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 30px;">
+                <label>이미지 활용 목적</label>
+                <select id="usagePurpose">
+                    <option value="개인작업 및 포트폴리오">개인작업 및 포트폴리오</option>
+                    <option value="SNS 업로드">SNS 업로드</option>
+                    <option value="상업 촬영">상업 촬영</option>
+                    <option value="기타 상호 합의된 목적">기타 상호 합의된 목적</option>
+                </select>
+            </div>
+
+            <div class="clause-box">
+                <div class="clause-item">
+                    <div class="clause-icon">📸</div>
+                    <div class="clause-text">
+                        <strong>상업적 이용 여부</strong>
+                        <p>촬영된 사진의 상업적 이용 동의를 선택합니다.</p>
+                        <div class="radio-group">
+                            <label class="radio-card">
+                                <input type="radio" name="commercialUse" value="상업적 이용 동의" checked>
+                                <span class="radio-text">동의</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="commercialUse" value="상업적 이용 불가">
+                                <span class="radio-text">불가</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="clause-item">
+                    <div class="clause-icon">✨</div>
+                    <div class="clause-text">
+                        <strong>사진 보정 및 편집</strong>
+                        <p>작업 완성도를 위해 보정이 가능하나, 사실과 다르게 왜곡할 수 없습니다.</p>
+                    </div>
+                </div>
+
+                <div class="clause-item">
+                    <div class="clause-icon">🚫</div>
+                    <div class="clause-text">
+                        <strong>제3자 제공 금지</strong>
+                        <p>상호 동의 없이 제3자(스톡사이트 등)에게 무단 배포, 판매하지 않습니다.</p>
+                    </div>
+                </div>
+
+                <div class="clause-item">
+                    <div class="clause-icon">🤝</div>
+                    <div class="clause-text">
+                        <strong>계약 유지 및 결과물 제공</strong>
+                        <p>합의된 기한 내 결과물을 제공하며, 단순 변심에 의한 일방적 파기는 불가합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevStep(2)">이전</button>
+                <button class="btn-primary" onclick="nextStep(4)">다음</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Photographer Signature -->
+        <div class="step" id="step-4">
+            <div class="step-header">
+                <span class="step-indicator">4 / 5</span>
+                <h2>📸 촬영자 님의<br>서명을 그려주세요</h2>
+                <p class="subtitle">위 조항에 상호 동의하며 서명합니다.</p>
+            </div>
+            
+            <div class="signature-section">
+                <div class="sig-header">
+                    <span>서명 패드</span>
+                    <button class="btn-text" onclick="clearSignature('canvasPhotographer')">지우기</button>
+                </div>
+                <div class="canvas-container">
+                    <canvas id="canvasPhotographer"></canvas>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevStep(3)">이전</button>
+                <button class="btn-primary" onclick="nextStep(5)">다음</button>
+            </div>
+        </div>
+
+        <!-- Step 5: Model Signature -->
+        <div class="step" id="step-5">
+            <div class="step-header">
+                <span class="step-indicator">5 / 5</span>
+                <h2>✨ 모델 님의<br>서명을 그려주세요</h2>
+                <p class="subtitle">위 조항에 상호 동의하며 서명합니다.</p>
+            </div>
+            
+            <div class="signature-section">
+                <div class="sig-header">
+                    <span>서명 패드</span>
+                    <button class="btn-text" onclick="clearSignature('canvasModel')">지우기</button>
+                </div>
+                <div class="canvas-container">
+                    <canvas id="canvasModel"></canvas>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevStep(4)">이전</button>
+                <button class="btn-primary" onclick="generateDocument()">완료하기</button>
+            </div>
+        </div>
+
+        <!-- Result / Output Step -->
+        <div class="step" id="step-result">
+            <div class="step-header center" style="margin-top:15px; margin-bottom: 20px;">
+                <h2>🎉 계약이 완료되었습니다!</h2>
+                <p class="subtitle">아래 버튼을 눌러 계약서를 갤러리에 저장하세요.</p>
+            </div>
+            
+            <!-- Hidden template to render html2canvas -->
+            <div id="exportTemplate" class="export-template">
+                <div class="doc-header">
+                    <h1 class="doc-title">초상권 및 상업이용 동의 계약서</h1>
+                    <p>본 계약서는 촬영자와 모델 양측의 권리 보호를 목적으로 체결됩니다.</p>
+                </div>
+
+                <div class="doc-section">
+                    <div class="doc-sec-title">1. 계약 기본 정보</div>
+                    <table class="doc-table">
+                        <tr><th>촬영 일자</th><td id="resDate"></td></tr>
+                        <tr><th>계약 유형</th><td id="resCondition"></td></tr>
+                    </table>
+                </div>
+
+                <div class="doc-section">
+                    <div class="doc-sec-title">2. 촬영자 및 모델 정보</div>
+                    <table class="doc-table">
+                        <tr><th>촬영자(작가)</th><td>성명: <span id="resPhotogName"></span><br>연락처: <span id="resPhotogPhone"></span></td></tr>
+                        <tr><th>모델(피사체)</th><td>성명: <span id="resModelName"></span><br>연락처: <span id="resModelPhone"></span></td></tr>
+                    </table>
+                </div>
+
+                <div class="doc-section">
+                    <div class="doc-sec-title">3. 상호 권리 및 이용 동의</div>
+                    <ol class="doc-clauses">
+                        <li><strong>활용 목적:</strong> <span id="resPurpose"></span></li>
+                        <li><strong>상업적 이용:</strong> <span id="resCommercial"></span></li>
+                        <li>촬영자는 작업물의 완성도를 위해 사진을 보정/편집할 수 있으나, 모델의 명예를 훼손하거나 왜곡할 수 없습니다.</li>
+                        <li>촬영자는 모델의 사전 동의 없이 사진을 제3자에게 무단 배포, 판매하지 않습니다.</li>
+                        <li>위 약속이 지켜지는 한, 일방적인 계약 파기는 불가하며 상호 합의된 기한 내 결과물을 제공합니다.</li>
+                    </ol>
+                    <p class="doc-agree-text">본인들은 위 내용을 충분히 숙지하였으며, 상호 간의 권리 존중 하에 계약 내용에 동의합니다.</p>
+                </div>
+
+                <div class="doc-signatures">
+                    <div class="doc-sig-box">
+                        <div class="doc-sig-label">촬영자 서명</div>
+                        <img id="resPhotogSig" src="" alt="촬영자 서명">
+                        <div class="doc-sig-name">서명자: <span id="resSigPhotogName"></span></div>
+                    </div>
+                    <div class="doc-sig-box">
+                        <div class="doc-sig-label">모델 서명</div>
+                        <img id="resModelSig" src="" alt="모델 서명">
+                        <div class="doc-sig-name">서명자: <span id="resSigModelName"></span></div>
+                    </div>
+                </div>
+                
+                <div class="doc-footer">
+                    작성일자: <span id="resToday"></span>
+                </div>
+            </div>
+
+            <!-- Download Button -->
+            <button class="btn-primary download-btn" onclick="downloadImage()">📸 갤러리에 저장하기</button>
+            <button class="btn-text" style="margin-top:15px; width:100%" onclick="location.reload()">새로 작성하기</button>
+        </div>
+
+        <!-- Global Sticky Ad Placeholder (Visible across all steps) -->
+        <div class="global-ad-slot">
+            <span>광고 영역 (구글 애드센스 하단 고정 배너)</span>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
