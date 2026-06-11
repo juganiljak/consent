@@ -77,6 +77,11 @@ const ctxM = canvasM.getContext('2d');
 let drawingState = { p: false, m: false };
 let signedState = { p: false, m: false };
 
+function readValue(id, fallback = '별도 기재 없음') {
+    const value = document.getElementById(id).value.trim();
+    return value || fallback;
+}
+
 function resizeCanvas(ctx, canvas) {
     const ratio = Math.max(window.devicePixelRatio || 1, 1);
     canvas.width = canvas.offsetWidth * ratio;
@@ -156,6 +161,11 @@ function generateDocument() {
 
     document.getElementById('resPurpose').innerText = document.getElementById('usagePurpose').value;
     document.getElementById('resCommercial').innerText = document.querySelector('input[name="commercialUse"]:checked').value;
+    document.getElementById('resRetouchedCount').innerText = readValue('retouchedCount');
+    document.getElementById('resFirstDeliveryDeadline').innerText = readValue('firstDeliveryDeadline');
+    document.getElementById('resDeliveryMethod').innerText = readValue('deliveryMethod');
+    document.getElementById('resRawFileProvision').innerText = readValue('rawFileProvision');
+    document.getElementById('resAdditionalNotes').innerText = readValue('additionalNotes');
     
     const today = new Date();
     document.getElementById('resToday').innerText = `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일`;
